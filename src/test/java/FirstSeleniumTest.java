@@ -39,61 +39,61 @@ public class FirstSeleniumTest {
         driver.manage().window().maximize();
     }
     
-    // @Test
-    // public void testSearch() {
-    //     MainPage mainPage = new MainPage(this.driver);
-    //     String shadertoyTitle = mainPage.getTitleText();
-    //     Assert.assertEquals(shadertoyTitle, "Shadertoy BETA");
-    //     LoginPage loginPage = mainPage.signIn();
-    //     String bodyText = loginPage.getBodyText();
-    //     Assert.assertTrue(bodyText.contains("selenium_test"));
-    //     ProfilePage profilePage = new ProfilePage(this.driver);
-    //     PublicProfilePage publicProfilePage = profilePage.setProfileDescription();
-    //     String profileBodyText = publicProfilePage.getProfileBodyText();
-    //     Assert.assertTrue(profileBodyText.contains("Hi! I am an automated program for testing websites!"));
-    //     PublicProfilePage logoutPage = publicProfilePage.logoutUser();
-    //     String logoutPageBodyText = logoutPage.getProfileBodyText();
-    //     Assert.assertTrue(logoutPageBodyText.contains("Sign In"));
-    // }
+    @Test
+    public void authTest() {
+        MainPage mainPage = new MainPage(this.driver);
+        String shadertoyTitle = mainPage.getTitleText();
+        Assert.assertEquals(shadertoyTitle, "Shadertoy BETA");
+        LoginPage loginPage = mainPage.signIn();
+        String bodyText = loginPage.getBodyText();
+        Assert.assertTrue(bodyText.contains("selenium_test"));
+        ProfilePage profilePage = new ProfilePage(this.driver);
+        PublicProfilePage publicProfilePage = profilePage.setProfileDescription();
+        String profileBodyText = publicProfilePage.getProfileBodyText();
+        Assert.assertTrue(profileBodyText.contains("Hi! I am an automated program for testing websites!"));
+        PublicProfilePage logoutPage = publicProfilePage.logoutUser();
+        String logoutPageBodyText = logoutPage.getProfileBodyText();
+        Assert.assertTrue(logoutPageBodyText.contains("Sign In"));
+    }
     
-    // @Test
-    // public void testSearch2() {
-    //     int contrCounter = 0;
-    //     Map<String,String> contrs = new HashMap<String,String>();
-    //     MainPage mainPage = new MainPage(this.driver);
-    //     WebElement contributors = this.driver.findElement(By.className("contributors"));
-    //     List<WebElement> contributorsList = contributors.findElements(By.className("regular"));
-    //     for ( WebElement contributor : contributorsList ) {
-    //         if ( contrCounter % 2 != 0 ) {
-    //             String link = contributor.getAttribute("href");
-    //             String text = contributor.getText();
-    //             text = text.substring(1, text.length() - 1);
-    //             contrs.put(link, text);
-    //         }
-    //         contrCounter += 1;
-    //     }
-    //     for (String link : contrs.keySet()) {
-    //         ContributionPage contributionPage = new ContributionPage(this.driver, link);
-    //         String shaderTitle = contributionPage.showShader();
-    //         Assert.assertTrue(shaderTitle.contains(contrs.get(link)));
-    //     }    
-    // }
+    @Test
+    public void staticTest() {
+        int contrCounter = 0;
+        Map<String,String> contrs = new HashMap<String,String>();
+        MainPage mainPage = new MainPage(this.driver);
+        WebElement contributors = this.driver.findElement(By.className("contributors"));
+        List<WebElement> contributorsList = contributors.findElements(By.className("regular"));
+        for ( WebElement contributor : contributorsList ) {
+            if ( contrCounter % 2 != 0 ) {
+                String link = contributor.getAttribute("href");
+                String text = contributor.getText();
+                text = text.substring(1, text.length() - 1);
+                contrs.put(link, text);
+            }
+            contrCounter += 1;
+        }
+        for (String link : contrs.keySet()) {
+            ContributionPage contributionPage = new ContributionPage(this.driver, link);
+            String shaderTitle = contributionPage.showShader();
+            Assert.assertTrue(shaderTitle.contains(contrs.get(link)));
+        }    
+    }
     
-    // @Test
-    // public void cookieTest() {
-    //     MainPage mainPage = new MainPage(this.driver);
-    //     Cookie lpCookie = driver.manage().getCookieNamed("_gat");
-    //     System.out.println(lpCookie.getValue());
-    //     assertThat(lpCookie.getValue(), containsString("1"));
-    //     Cookie newCookie = new Cookie("foo", "bar");
-    //     driver.manage().addCookie(newCookie);
-    //     driver.navigate().refresh();
-    //     Cookie driverCookie = driver.manage().getCookieNamed("foo");
-    //     assertThat(driverCookie.getValue(), equalTo("bar"));
-    //     driver.manage().deleteCookie(driverCookie);
-    //     Cookie deletedCookie = driver.manage().getCookieNamed("foo");
-    //     assertThat(deletedCookie, is(nullValue()));
-    // }
+    @Test
+    public void cookieTest() {
+        MainPage mainPage = new MainPage(this.driver);
+        Cookie lpCookie = driver.manage().getCookieNamed("_gat");
+        System.out.println(lpCookie.getValue());
+        assertThat(lpCookie.getValue(), containsString("1"));
+        Cookie newCookie = new Cookie("foo", "bar");
+        driver.manage().addCookie(newCookie);
+        driver.navigate().refresh();
+        Cookie driverCookie = driver.manage().getCookieNamed("foo");
+        assertThat(driverCookie.getValue(), equalTo("bar"));
+        driver.manage().deleteCookie(driverCookie);
+        Cookie deletedCookie = driver.manage().getCookieNamed("foo");
+        assertThat(deletedCookie, is(nullValue()));
+    }
 
     @Test
     public void downloadTest() throws Exception{
